@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Learning Journey - 6 Month Roadmap</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Archivo+Black&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #FF3366;
+      --secondary: #6C5CE7;
+      --accent: #00D9FF;
+      --dark: #1A1A2E;
+      --mid: #16213E;
+      --light: #E8F0F2;
+      --success: #00F5A0;
+      --warning: #FFA500;
+      --card-bg: #0F3460;
+      --text: #FFFFFF;
+      --text-dim: #A8B2D1;
+      --shadow: rgba(0, 0, 0, 0.3);
+    }
+
+    body {
+      font-family: 'Work Sans', sans-serif;
+      background: linear-gradient(135deg, var(--dark) 0%, var(--mid) 100%);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 51, 102, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(108, 92, 231, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      animation: slideDown 0.8s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-family: 'Space Mono', monospace;
+      color: var(--text-dim);
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .progress-header {
+      background: rgba(15, 52, 96, 0.6);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 51, 102, 0.3);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 10px 40px var(--shadow);
+      animation: fadeIn 0.8s ease-out 0.2s both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, rgba(108, 92, 231, 0.2), rgba(255, 51, 102, 0.2));
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(255, 51, 102, 0.3);
+    }
+
+    .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-value {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 2rem;
+      background: linear-gradient(135deg, var(--accent), var(--success));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .overall-progress {
+      margin-top: 1.5rem;
+    }
+
+    .progress-bar-container {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 50px;
+      height: 30px;
+      overflow: hidden;
+      position: relative;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+      border-radius: 50px;
+      transition: width 0.5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 1rem;
+      font-family: 'Space Mono', monospace;
+      font-weight: bold;
+      font-size: 0.85rem;
+      box-shadow: 0 0 20px rgba(255, 51, 102, 0.5);
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .column {
+      background: rgba(15, 52, 96, 0.4);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 1.5rem;
+      border: 2px solid rgba(255, 51, 102, 0.2);
+      box-shadow: 0 10px 40px var(--shadow);
+      animation: fadeIn 0.8s ease-out both;
+    }
+
+    .column:nth-child(1) { animation-delay: 0.1s; }
+    .column:nth-child(2) { animation-delay: 0.2s; }
+    .column:nth-child(3) { animation-delay: 0.3s; }
+    .column:nth-child(4) { animation-delay: 0.4s; }
+
+    .column-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid rgba(255, 51, 102, 0.3);
+    }
+
+    .column-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 1.5rem;
+      color: var(--text);
+    }
+
+    .column-count {
+      font-family: 'Space Mono', monospace;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-height: 600px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+    }
+
+    .cards::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .cards::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+    }
+
+    .cards::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 10px;
+    }
+
+    .card {
+      background: rgba(22, 33, 62, 0.8);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      position: relative;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--primary), var(--secondary));
+      transition: width 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateX(5px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 30px rgba(255, 51, 102, 0.3);
+    }
+
+    .card:hover::before {
+      width: 100%;
+      opacity: 0.1;
+    }
+
+    .card.completed {
+      opacity: 0.7;
+      border-color: var(--success);
+    }
+
+    .card.completed::before {
+      background: var(--success);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--text);
+      flex: 1;
+      line-height: 1.4;
+    }
+
+    .checkbox {
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--primary);
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+      margin-left: 0.75rem;
+    }
+
+    .checkbox:hover {
+      background: rgba(255, 51, 102, 0.2);
+      transform: scale(1.1);
+    }
+
+    .checkbox.checked {
+      background: linear-gradient(135deg, var(--success), var(--accent));
+      border-color: var(--success);
+    }
+
+    .checkbox.checked::after {
+      content: '✓';
+      color: white;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .card-meta {
+      display: none;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 0.75rem;
+    }
+
+    .card:hover .card-meta {
+      display: flex;
+    }
+
+    .card-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 12px;
+      background: rgba(108, 92, 231, 0.3);
+      border: 1px solid rgba(108, 92, 231, 0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .tag-link {
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .tag-link:hover {
+      background: rgba(108, 92, 231, 0.6);
+      border-color: rgba(108, 92, 231, 0.9);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(108, 92, 231, 0.4);
+    }
+
+    .card-deadline {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 12px;
+      background: rgba(255, 51, 102, 0.3);
+      border: 1px solid rgba(255, 51, 102, 0.5);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .card-deadline.overdue {
+      background: rgba(255, 165, 0, 0.3);
+      border-color: var(--warning);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .add-card {
+      background: rgba(255, 51, 102, 0.1);
+      border: 2px dashed rgba(255, 51, 102, 0.5);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      color: var(--primary);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .add-card:hover {
+      background: rgba(255, 51, 102, 0.2);
+      border-color: var(--primary);
+      transform: scale(1.02);
+    }
+
+    .timeline-view {
+      margin-top: 3rem;
+      background: rgba(15, 52, 96, 0.4);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 2px solid rgba(255, 51, 102, 0.2);
+      box-shadow: 0 10px 40px var(--shadow);
+    }
+
+    .timeline-header {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1rem;
+    }
+
+    .month-column {
+      background: rgba(22, 33, 62, 0.6);
+      border-radius: 12px;
+      padding: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .month-title {
+      font-family: 'Space Mono', monospace;
+      font-weight: bold;
+      text-align: center;
+      padding: 0.75rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .month-phases {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .phase-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.5rem;
+      border-radius: 6px;
+      border-left: 3px solid var(--accent);
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .phase-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateX(5px);
+    }
+
+    .phase-item.completed {
+      border-left-color: var(--success);
+      opacity: 0.7;
+    }
+
+    @media (max-width: 1200px) {
+      .timeline {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .board {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .controls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: 'Space Mono', monospace;
+      padding: 0.75rem 1.5rem;
+      border: 2px solid var(--primary);
+      background: transparent;
+      color: var(--primary);
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+    }
+
+    .btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(255, 51, 102, 0.4);
+    }
+
+    .btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border-color: transparent;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>React Mastery Journey</h1>
+      <p class="subtitle">Your 6-Month Professional Development Path</p>
+    </header>
+
+    <div class="progress-header">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Total Objectives</div>
+          <div class="stat-value" id="totalObjectives">32</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Completed</div>
+          <div class="stat-value" id="completedObjectives">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">In Progress</div>
+          <div class="stat-value" id="inProgressObjectives">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Days Remaining</div>
+          <div class="stat-value" id="daysRemaining">180</div>
+        </div>
+      </div>
+      <div class="overall-progress">
+        <div class="stat-label">Overall Progress</div>
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="overallProgress" style="width: 0%">0%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="btn active" onclick="showView('board')">Board View</button>
+      <button class="btn" onclick="showView('timeline')">Timeline View</button>
+      <button class="btn" onclick="document.getElementById('fileInput').click()">📁 Import Learning Data</button>
+      <button class="btn" onclick="resetProgress()">Reset Progress</button>
+      <button class="btn" onclick="exportProgress()">Export Progress</button>
+      <input type="file" id="fileInput" accept=".json" style="display: none;" onchange="importLearningData(event)">
+    </div>
+
+    <div id="boardView" class="board"></div>
+    <div id="timelineView" class="timeline-view" style="display: none;">
+      <div class="timeline-header">6-Month Timeline</div>
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </div>
+
+  <script>
+    const learningData = {
+      tagResources: {
+        "Fundamentals": "https://react.dev/learn",
+        "Components": "https://react.dev/learn/your-first-component",
+        "State": "https://react.dev/learn/state-a-components-memory",
+        "Effects": "https://react.dev/learn/synchronizing-with-effects",
+        "Context": "https://react.dev/learn/passing-data-deeply-with-context",
+        "Performance": "https://react.dev/learn/render-and-commit",
+        "Optimization": "https://react.dev/reference/react/memo",
+        "Advanced": "https://react.dev/learn/escape-hatches",
+        "Refs": "https://react.dev/learn/referencing-values-with-refs",
+        "Reusability": "https://react.dev/learn/reusing-logic-with-custom-hooks",
+        "React 19": "https://react.dev/blog/2024/12/05/react-19",
+        "Async": "https://react.dev/reference/react/use",
+        "Suspense": "https://react.dev/reference/react/Suspense",
+        "RSC": "https://react.dev/reference/rsc/server-components",
+        "TypeScript": "https://react.dev/learn/typescript",
+        "Type Safety": "https://www.typescriptlang.org/docs/handbook/react.html",
+        "Tooling": "https://vitejs.dev/guide/",
+        "Vite": "https://vitejs.dev/",
+        "Framework": "https://nextjs.org/docs",
+        "Next.js": "https://nextjs.org/docs",
+        "Data Fetching": "https://tanstack.com/query/latest/docs/framework/react/overview",
+        "Global": "https://docs.pmnd.rs/zustand/getting-started/introduction",
+        "Redux": "https://redux-toolkit.js.org/introduction/getting-started",
+        "Testing": "https://testing-library.com/docs/react-testing-library/intro/",
+        "RTL": "https://testing-library.com/docs/react-testing-library/intro/",
+        "E2E": "https://playwright.dev/docs/intro",
+        "Architecture": "https://react.dev/learn/thinking-in-react",
+        "Clean Code": "https://github.com/ryanmcdermott/clean-code-javascript",
+        "Web Vitals": "https://web.dev/vitals/",
+        "Accessibility": "https://www.w3.org/WAI/WCAG21/quickref/",
+        "a11y": "https://www.w3.org/WAI/WCAG21/quickref/",
+        "Production": "https://react.dev/learn/start-a-new-react-project",
+        "Deployment": "https://vercel.com/docs",
+        "Project": "https://react.dev/learn/tutorial-tic-tac-toe",
+        "Portfolio": "https://github.com/topics/react-portfolio"
+      },
+      phases: [
+        {
+          title: "Phase 1: React Fundamentals",
+          weeks: "1-3",
+          month: 1,
+          objectives: [
+            {
+              id: "obj-1-1",
+              title: "Master Modern Component Architecture",
+              deadline: "Week 1",
+              tags: ["Fundamentals", "Components"],
+              description: "Build functional components and understand component hierarchy"
+            },
+            {
+              id: "obj-1-2",
+              title: "Implement State Management with Hooks",
+              deadline: "Week 2",
+              tags: ["Fundamentals", "State"],
+              description: "Master useState and component-level state"
+            },
+            {
+              id: "obj-1-3",
+              title: "Master Side Effects and Lifecycle",
+              deadline: "Week 2",
+              tags: ["Fundamentals", "Effects"],
+              description: "Use useEffect for side effects and cleanup"
+            },
+            {
+              id: "obj-1-4",
+              title: "Solve Prop Drilling with Context",
+              deadline: "Week 3",
+              tags: ["Fundamentals", "Context"],
+              description: "Implement Context API for global state"
+            }
+          ]
+        },
+        {
+          title: "Phase 2: Advanced Hooks & Performance",
+          weeks: "4-6",
+          month: 2,
+          objectives: [
+            {
+              id: "obj-2-1",
+              title: "Optimize Performance with Memoization",
+              deadline: "Week 4",
+              tags: ["Performance", "Optimization"],
+              description: "Use useMemo and useCallback effectively"
+            },
+            {
+              id: "obj-2-2",
+              title: "Handle Complex State with useReducer",
+              deadline: "Week 5",
+              tags: ["Advanced", "State"],
+              description: "Implement complex state logic with reducers"
+            },
+            {
+              id: "obj-2-3",
+              title: "Work with DOM References",
+              deadline: "Week 5",
+              tags: ["Advanced", "Refs"],
+              description: "Master useRef for DOM manipulation"
+            },
+            {
+              id: "obj-2-4",
+              title: "Build Custom Hooks",
+              deadline: "Week 6",
+              tags: ["Advanced", "Reusability"],
+              description: "Create reusable custom hooks"
+            }
+          ]
+        },
+        {
+          title: "Phase 3: Modern React (React 19)",
+          weeks: "7-9",
+          month: 3,
+          objectives: [
+            {
+              id: "obj-3-1",
+              title: "Master Asynchronous UI with Actions",
+              deadline: "Week 7",
+              tags: ["React 19", "Async"],
+              description: "Use Actions API for form handling"
+            },
+            {
+              id: "obj-3-2",
+              title: "Integrate Promises with use()",
+              deadline: "Week 8",
+              tags: ["React 19", "Suspense"],
+              description: "Read promises directly in render"
+            },
+            {
+              id: "obj-3-3",
+              title: "Understand Server Components",
+              deadline: "Week 8",
+              tags: ["React 19", "RSC"],
+              description: "Learn Server vs Client Components"
+            },
+            {
+              id: "obj-3-4",
+              title: "Leverage React Compiler",
+              deadline: "Week 9",
+              tags: ["React 19", "Performance"],
+              description: "Automatic optimization with compiler"
+            }
+          ]
+        },
+        {
+          title: "Phase 4: TypeScript & Tooling",
+          weeks: "10-12",
+          month: 3,
+          objectives: [
+            {
+              id: "obj-4-1",
+              title: "Integrate TypeScript with React",
+              deadline: "Week 10",
+              tags: ["TypeScript", "Type Safety"],
+              description: "Type React components properly"
+            },
+            {
+              id: "obj-4-2",
+              title: "Set Up Modern Dev Environment",
+              deadline: "Week 11",
+              tags: ["Tooling", "Vite"],
+              description: "Configure Vite, ESLint, Prettier"
+            },
+            {
+              id: "obj-4-3",
+              title: "Choose and Use a Framework",
+              deadline: "Week 12",
+              tags: ["Framework", "Next.js"],
+              description: "Build with Next.js App Router"
+            }
+          ]
+        },
+        {
+          title: "Phase 5: State Management at Scale",
+          weeks: "13-15",
+          month: 4,
+          objectives: [
+            {
+              id: "obj-5-1",
+              title: "Master Server State with TanStack Query",
+              deadline: "Week 13",
+              tags: ["State", "Data Fetching"],
+              description: "Implement React Query for API data"
+            },
+            {
+              id: "obj-5-2",
+              title: "Implement Client State with Zustand",
+              deadline: "Week 14",
+              tags: ["State", "Global"],
+              description: "Use Zustand for global state"
+            },
+            {
+              id: "obj-5-3",
+              title: "Understand Redux Toolkit",
+              deadline: "Week 15",
+              tags: ["State", "Redux"],
+              description: "Learn Redux for enterprise apps"
+            }
+          ]
+        },
+        {
+          title: "Phase 6: Testing & Best Practices",
+          weeks: "16-18",
+          month: 5,
+          objectives: [
+            {
+              id: "obj-6-1",
+              title: "Write Component Tests",
+              deadline: "Week 16",
+              tags: ["Testing", "RTL"],
+              description: "Test with React Testing Library"
+            },
+            {
+              id: "obj-6-2",
+              title: "Implement E2E Testing",
+              deadline: "Week 17",
+              tags: ["Testing", "E2E"],
+              description: "E2E tests with Playwright"
+            },
+            {
+              id: "obj-6-3",
+              title: "Follow Architecture Best Practices",
+              deadline: "Week 18",
+              tags: ["Architecture", "Clean Code"],
+              description: "Scalable folder structure and patterns"
+            }
+          ]
+        },
+        {
+          title: "Phase 7: Performance & Production",
+          weeks: "19-21",
+          month: 5,
+          objectives: [
+            {
+              id: "obj-7-1",
+              title: "Optimize for Core Web Vitals",
+              deadline: "Week 19",
+              tags: ["Performance", "Web Vitals"],
+              description: "Achieve Lighthouse 90+ scores"
+            },
+            {
+              id: "obj-7-2",
+              title: "Implement Accessibility",
+              deadline: "Week 20",
+              tags: ["Accessibility", "a11y"],
+              description: "WCAG 2.1 Level AA compliance"
+            },
+            {
+              id: "obj-7-3",
+              title: "Prepare for Production",
+              deadline: "Week 21",
+              tags: ["Production", "Deployment"],
+              description: "Deploy with monitoring and CI/CD"
+            }
+          ]
+        },
+        {
+          title: "Phase 8: Portfolio Projects",
+          weeks: "22-24",
+          month: 6,
+          objectives: [
+            {
+              id: "obj-8-1",
+              title: "Build E-commerce Platform",
+              deadline: "Week 22",
+              tags: ["Project", "Portfolio"],
+              description: "Full-featured shopping app"
+            },
+            {
+              id: "obj-8-2",
+              title: "Build Real-time Collaboration Tool",
+              deadline: "Week 23",
+              tags: ["Project", "Portfolio"],
+              description: "Live updates with WebSockets"
+            },
+            {
+              id: "obj-8-3",
+              title: "Build Data Dashboard",
+              deadline: "Week 24",
+              tags: ["Project", "Portfolio"],
+              description: "Analytics dashboard with visualizations"
+            }
+          ]
+        }
+      ]
+    };
+
+    // Initialize state from localStorage
+    let completedItems = JSON.parse(localStorage.getItem('reactLearningProgress')) || [];
+    let currentView = 'board';
+    const startDate = new Date(localStorage.getItem('startDate') || new Date());
+
+    function saveProgress() {
+      localStorage.setItem('reactLearningProgress', JSON.stringify(completedItems));
+      localStorage.setItem('startDate', startDate.toISOString());
+    }
+
+    function toggleComplete(objectiveId) {
+      const index = completedItems.indexOf(objectiveId);
+      if (index > -1) {
+        completedItems.splice(index, 1);
+      } else {
+        completedItems.push(objectiveId);
+      }
+      saveProgress();
+      updateStats();
+      renderCurrentView();
+    }
+
+    function updateStats() {
+      const total = learningData.phases.reduce((sum, phase) => sum + phase.objectives.length, 0);
+      const completed = completedItems.length;
+      const inProgress = learningData.phases.filter(phase => 
+        phase.objectives.some(obj => completedItems.includes(obj.id)) &&
+        !phase.objectives.every(obj => completedItems.includes(obj.id))
+      ).length;
+
+      const daysSinceStart = Math.floor((new Date() - startDate) / (1000 * 60 * 60 * 24));
+      const daysRemaining = Math.max(0, 180 - daysSinceStart);
+
+      document.getElementById('totalObjectives').textContent = total;
+      document.getElementById('completedObjectives').textContent = completed;
+      document.getElementById('inProgressObjectives').textContent = inProgress;
+      document.getElementById('daysRemaining').textContent = daysRemaining;
+
+      const progress = Math.round((completed / total) * 100);
+      const progressBar = document.getElementById('overallProgress');
+      progressBar.style.width = `${progress}%`;
+      progressBar.textContent = `${progress}%`;
+    }
+
+    function renderBoard() {
+      const board = document.getElementById('boardView');
+      board.innerHTML = '';
+
+      const columns = [
+        { title: 'To Do', filter: obj => !completedItems.includes(obj.id) && !isPhaseInProgress(obj) },
+        { title: 'In Progress', filter: obj => !completedItems.includes(obj.id) && isPhaseInProgress(obj) },
+        { title: 'Completed', filter: obj => completedItems.includes(obj.id) }
+      ];
+
+      columns.forEach((column, idx) => {
+        const columnEl = document.createElement('div');
+        columnEl.className = 'column';
+        
+        const allObjectives = learningData.phases.flatMap(phase => 
+          phase.objectives.map(obj => ({ ...obj, phase: phase.title }))
+        );
+        const filteredObjectives = allObjectives.filter(column.filter);
+
+        columnEl.innerHTML = `
+          <div class="column-header">
+            <div class="column-title">${column.title}</div>
+            <div class="column-count">${filteredObjectives.length}</div>
+          </div>
+          <div class="cards" id="column-${idx}"></div>
+        `;
+
+        board.appendChild(columnEl);
+
+        const cardsContainer = columnEl.querySelector('.cards');
+        filteredObjectives.forEach(obj => {
+          const card = createCard(obj);
+          cardsContainer.appendChild(card);
+        });
+      });
+    }
+
+    function isPhaseInProgress(objective) {
+      const phase = learningData.phases.find(p => p.objectives.some(o => o.id === objective.id));
+      if (!phase) return false;
+      
+      return phase.objectives.some(obj => completedItems.includes(obj.id)) &&
+             !phase.objectives.every(obj => completedItems.includes(obj.id));
+    }
+
+    function createCard(objective) {
+      const card = document.createElement('div');
+      card.className = `card ${completedItems.includes(objective.id) ? 'completed' : ''}`;
+      
+      const isOverdue = isDeadlineOverdue(objective.deadline);
+      
+      const tagsHTML = objective.tags.map(tag => {
+        const resourceUrl = learningData.tagResources[tag];
+        if (resourceUrl) {
+          return `<a href="${resourceUrl}" target="_blank" class="card-tag tag-link" title="View ${tag} resources">${tag} 🔗</a>`;
+        }
+        return `<span class="card-tag">${tag}</span>`;
+      }).join('');
+      
+      card.innerHTML = `
+        <div class="card-header">
+          <div class="card-title">${objective.title}</div>
+          <div class="checkbox ${completedItems.includes(objective.id) ? 'checked' : ''}" 
+               onclick="toggleComplete('${objective.id}')"></div>
+        </div>
+        <div class="card-meta">
+          ${tagsHTML}
+          <span class="card-deadline ${isOverdue ? 'overdue' : ''}">📅 ${objective.deadline}</span>
+        </div>
+      `;
+      
+      return card;
+    }
+
+    function isDeadlineOverdue(deadline) {
+      const weekMatch = deadline.match(/Week (\d+)/);
+      if (!weekMatch) return false;
+      
+      const weekNumber = parseInt(weekMatch[1]);
+      const daysSinceStart = Math.floor((new Date() - startDate) / (1000 * 60 * 60 * 24));
+      const currentWeek = Math.floor(daysSinceStart / 7) + 1;
+      
+      return currentWeek > weekNumber;
+    }
+
+    function renderTimeline() {
+      const timeline = document.getElementById('timeline');
+      timeline.innerHTML = '';
+
+      const months = [
+        { num: 1, name: 'Month 1', weeks: '1-4' },
+        { num: 2, name: 'Month 2', weeks: '5-8' },
+        { num: 3, name: 'Month 3', weeks: '9-12' },
+        { num: 4, name: 'Month 4', weeks: '13-16' },
+        { num: 5, name: 'Month 5', weeks: '17-20' },
+        { num: 6, name: 'Month 6', weeks: '21-24' }
+      ];
+
+      months.forEach(month => {
+        const monthCol = document.createElement('div');
+        monthCol.className = 'month-column';
+        
+        const phasesInMonth = learningData.phases.filter(p => p.month === month.num);
+        
+        monthCol.innerHTML = `
+          <div class="month-title">${month.name}<br>${month.weeks}</div>
+          <div class="month-phases">
+            ${phasesInMonth.map(phase => {
+              const allCompleted = phase.objectives.every(obj => completedItems.includes(obj.id));
+              return `
+                <div class="phase-item ${allCompleted ? 'completed' : ''}" 
+                     onclick="scrollToPhase('${phase.title}')">
+                  ${phase.title.replace('Phase ', 'P')}
+                  <div style="margin-top: 0.25rem; font-size: 0.7rem; opacity: 0.7;">
+                    ${phase.objectives.filter(o => completedItems.includes(o.id)).length}/${phase.objectives.length} done
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+        
+        timeline.appendChild(monthCol);
+      });
+    }
+
+    function scrollToPhase(phaseTitle) {
+      showView('board');
+      // Smooth scroll to phase in board view
+      setTimeout(() => {
+        const cards = document.querySelectorAll('.card-title');
+        cards.forEach(card => {
+          if (card.textContent.includes(phaseTitle.split(':')[1])) {
+            card.closest('.card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        });
+      }, 100);
+    }
+
+    function showView(view) {
+      currentView = view;
+      const boardView = document.getElementById('boardView');
+      const timelineView = document.getElementById('timelineView');
+      const buttons = document.querySelectorAll('.controls .btn');
+
+      buttons.forEach(btn => btn.classList.remove('active'));
+      
+      if (view === 'board') {
+        boardView.style.display = 'grid';
+        timelineView.style.display = 'none';
+        buttons[0].classList.add('active');
+        renderBoard();
+      } else {
+        boardView.style.display = 'none';
+        timelineView.style.display = 'block';
+        buttons[1].classList.add('active');
+        renderTimeline();
+      }
+    }
+
+    function renderCurrentView() {
+      if (currentView === 'board') {
+        renderBoard();
+      } else {
+        renderTimeline();
+      }
+    }
+
+    function resetProgress() {
+      if (confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
+        completedItems = [];
+        localStorage.setItem('startDate', new Date().toISOString());
+        saveProgress();
+        updateStats();
+        renderCurrentView();
+      }
+    }
+
+    function exportProgress() {
+      const data = {
+        completedItems,
+        startDate: startDate.toISOString(),
+        exportDate: new Date().toISOString(),
+        progress: {
+          total: learningData.phases.reduce((sum, phase) => sum + phase.objectives.length, 0),
+          completed: completedItems.length,
+          percentage: Math.round((completedItems.length / learningData.phases.reduce((sum, phase) => sum + phase.objectives.length, 0)) * 100)
+        }
+      };
+
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `react-learning-progress-${new Date().toISOString().split('T')[0]}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function importLearningData(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          
+          // Check if it's a custom learning data file (has phases structure)
+          if (imported.phases && Array.isArray(imported.phases)) {
+            // Import custom learning data
+            if (confirm('This will replace your current learning objectives. Continue?')) {
+              // Validate the structure
+              const isValid = imported.phases.every(phase => 
+                phase.title && phase.objectives && Array.isArray(phase.objectives)
+              );
+              
+              if (isValid) {
+                Object.assign(learningData, imported);
+                completedItems = [];
+                saveProgress();
+                updateStats();
+                renderCurrentView();
+                alert('✅ Learning data imported successfully!');
+              } else {
+                alert('❌ Invalid learning data format. Please check your JSON file.');
+              }
+            }
+          } 
+          // Check if it's a progress export file
+          else if (imported.completedItems && imported.startDate) {
+            if (confirm('Import your saved progress?')) {
+              completedItems = imported.completedItems || [];
+              if (imported.startDate) {
+                localStorage.setItem('startDate', imported.startDate);
+              }
+              saveProgress();
+              updateStats();
+              renderCurrentView();
+              alert('✅ Progress imported successfully!');
+            }
+          } 
+          else {
+            alert('❌ Unrecognized file format. Please upload a valid learning data or progress JSON file.');
+          }
+        } catch (error) {
+          alert('❌ Error reading file: ' + error.message);
+        }
+      };
+      reader.readAsText(file);
+      
+      // Reset the file input so the same file can be uploaded again
+      event.target.value = '';
+    }
+
+    // Initialize
+    updateStats();
+    renderBoard();
+  </script>
+</body>
+</html>
