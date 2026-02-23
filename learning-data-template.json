@@ -1,0 +1,64 @@
+{
+  "tagResources": {
+    "Tag1": "https://example.com/tag1-resources",
+    "Tag2": "https://example.com/tag2-resources",
+    "Tag3": "https://react.dev/learn"
+  },
+  "phases": [
+    {
+      "title": "Phase 1: Your Custom Phase Name",
+      "weeks": "1-3",
+      "month": 1,
+      "objectives": [
+        {
+          "id": "obj-1-1",
+          "title": "Your First Learning Objective",
+          "deadline": "Week 1",
+          "tags": ["Tag1", "Tag2"],
+          "description": "Description of what you'll learn",
+          "topics": [
+            { "name": "Topic 1", "url": "https://example.com/topic1" },
+            { "name": "Topic 2", "url": "https://example.com/topic2" }
+          ],
+          "projects": [
+            "Practice project 1",
+            "Practice project 2"
+          ]
+        },
+        {
+          "id": "obj-1-2",
+          "title": "Your Second Learning Objective",
+          "deadline": "Week 2",
+          "tags": ["Tag1", "Tag3"],
+          "description": "Another objective description",
+          "topics": [
+            { "name": "Advanced Topic", "url": "https://example.com/advanced" }
+          ],
+          "projects": [
+            "Build something complex"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Phase 2: Another Phase",
+      "weeks": "4-6",
+      "month": 2,
+      "objectives": [
+        {
+          "id": "obj-2-1",
+          "title": "Phase 2 Objective",
+          "deadline": "Week 4",
+          "tags": ["Advanced"],
+          "description": "Advanced topic",
+          "topics": [
+            { "name": "Expert Topic", "url": "https://example.com/expert" }
+          ],
+          "projects": [
+            "Final project"
+          ]
+        }
+      ]
+    }
+  ]
+}
